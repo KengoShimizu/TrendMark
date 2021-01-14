@@ -1,28 +1,29 @@
 import React from 'react';
 // common
-import Text from './Text';
+import CommonStyle from 'common/CommonStyle';
 
 interface TextAreaProps {
   theme?: TextAreaThemes[];
+  style?: string;
   name: string;
-  label: string;
   cols: number;
   rows: number;
   maxLength: number;
-  placeholder: string;
+  placeholder?: string;
 }
 
 export enum TextAreaThemes {
+  CUSTOM = 'CUSTOM',
 }
 
 enum ModifierClassNames {
+  CUSTOM = 'custom',
 }
 
-const TextArea: React.FC<TextAreaProps> = ({ theme = [], name, label, cols, rows, maxLength, placeholder }) => {
+const TextArea: React.FC<TextAreaProps> = ({ theme = [], style = '', name, cols, rows, maxLength, placeholder = '' }) => {
   const modifierClasses = theme.map(data => ModifierClassNames[data]).join(' ');
   return (
     <>
-      <Text><label htmlFor={name} className="label">{label}</label></Text>
       <textarea 
         className={["textarea", modifierClasses].join(' ')}
         id={name} 
@@ -33,22 +34,20 @@ const TextArea: React.FC<TextAreaProps> = ({ theme = [], name, label, cols, rows
         placeholder={placeholder}/>
       <style jsx>
         {`
-          .label{
-            margin: 10px;
-          }
           .textarea{
-            margin: 10px 0 32px;
-            width: 100%;
-            padding: 10px 15px;
-            font-size: 16px;
             border-radius: 3px;
-            border: 2px solid #ddd;
+            border: 1px solid ${CommonStyle.BorderColor};
             box-sizing: border-box;
+            transition: ${CommonStyle.Transition};
           }
           .textarea:focus {
-            border: 2px solid #ff9900; 
+            border: 1px solid ${CommonStyle.AccentColor};
+            box-shadow: 0 0 5px ${CommonStyle.AccentColor};
             z-index: 10;
             outline: 0;
+          }
+          .custom{
+            ${style}
           }
         `}
       </style>

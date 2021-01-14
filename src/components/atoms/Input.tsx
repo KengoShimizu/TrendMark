@@ -1,24 +1,25 @@
 import React from 'react';
 // common
-import Text from './Text';
+import CommonStyle from 'common/CommonStyle';
 
 interface InputProps {
   theme?: InputThemes[];
+  style?: string;
   name: string;
-  label: string;
 }
 
 export enum InputThemes {
+  CUSTOM_ = 'CUSTOM',
 }
 
 enum ModifierClassNames {
+  CUSTOM = 'custom',
 }
 
-const Input: React.FC<InputProps> = ({ theme = [], name, label }) => {
+const Input: React.FC<InputProps> = ({ theme = [], style = '', name }) => {
   const modifierClasses = theme.map(data => ModifierClassNames[data]).join(' ');
   return (
     <>
-      <Text><label htmlFor={name} className="label">{label}</label></Text>
       <input 
         className={["input", modifierClasses].join(' ')}
         type="text" 
@@ -26,22 +27,20 @@ const Input: React.FC<InputProps> = ({ theme = [], name, label }) => {
         id={name}/>
       <style jsx>
         {`
-          .label{
-            margin: 10px;
-          }
           .input{
-            margin: 10px 0 32px;
-            width: 100%;
-            padding: 10px 15px;
-            font-size: 16px;
             border-radius: 3px;
-            border: 2px solid #ddd;
+            border: 1px solid ${CommonStyle.BorderColor};
             box-sizing: border-box;
+            transition: ${CommonStyle.Transition};
           }
           .input:focus {
-            border: 2px solid #ff9900; 
+            border: 1px solid ${CommonStyle.AccentColor}; 
+            box-shadow: 0 0 5px ${CommonStyle.AccentColor};
             z-index: 10;
             outline: 0;
+          }
+          .custom{
+            ${style}
           }
         `}
       </style>

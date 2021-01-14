@@ -4,7 +4,11 @@
 
 const CommonStyle = {
   // 色
-  AccentColor: '#DF6059',
+  AccentColor: '#eb6100',
+  SecondColor: '#f56500',
+  BorderColor: '#ddd',
+  // 文字色
+  TextWhite: '#fff',
   // フォントサイズ 
   Title: '24px',
   SubTitle: '18px',
@@ -16,6 +20,8 @@ const CommonStyle = {
   TwitterColor: '#91C4F3',
   GoogleColor: '#D8503F',
   FacebookColor: '#425994',
+  // アニメーション秒数
+  Transition: '.4s'
 };
 
 export default CommonStyle;

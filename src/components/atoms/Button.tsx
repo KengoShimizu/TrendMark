@@ -1,38 +1,52 @@
+import CommonStyle from 'common/CommonStyle';
 import React from 'react';
 
 interface ButtonProps {
   theme?: ButtonThemes[];
   children?: React.ReactNode;
-  style?: {};
+  style?: string;
   onClick?: any;
 }
 
 export enum ButtonThemes {
-  SAMPLE = 'SAMPLE',
+  CUSTOM = 'CUSTOM',
 }
 
 enum ModifierClassNames {
-  SAMPLE = 'sample',
+  CUSTOM = 'custom',
 }
 
 
-const Button: React.FC<ButtonProps> = ({ theme = [], children, style = {}, onClick }) => {
+const Button: React.FC<ButtonProps> = ({ theme = [], children, style = '', onClick }) => {
   const modifierClasses = theme.map(data => ModifierClassNames[data]).join(' ');
   return (
-    <button className={["button", modifierClasses].join(' ')} style={style} onClick={onClick}>
+    <a className={["button", modifierClasses].join(' ')} onClick={onClick}>
       {children}
       <style jsx>
         {`
           .button{
+            position: relative;
+            display: inline-block;
             cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            user-select: none;
+            transition: all ${CommonStyle.Transition};
+            text-align: center;
+            vertical-align: middle;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            color: ${CommonStyle.TextWhite};
+            background-color: ${CommonStyle.AccentColor};
           }
-          .sample{}
+          .button:hover{
+            color: ${CommonStyle.TextWhite};
+            background: ${CommonStyle.SecondColor};
+          }
+          .custom{
+            ${style}
+          }
         `}
       </style>
-    </button>
+    </a>
   );
 }
 
