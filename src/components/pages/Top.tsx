@@ -3,12 +3,10 @@ import React from 'react';
 const Top: React.FC = (props: any) => {
   return (
     <>
-      <div className="main">
-        a
+      <div className="container">
       </div>
       <style jsx>{`
-        .main{
-          padding: 100px;
+        .container{
         }
       `}</style>
     </>
