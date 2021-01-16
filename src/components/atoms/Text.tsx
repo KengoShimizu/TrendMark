@@ -1,3 +1,4 @@
+import CommonStyle from 'common/CommonStyle';
 import React from 'react';
 
 interface TextProps {
@@ -8,10 +9,14 @@ interface TextProps {
 
 export enum TextThemes {
   CUSTOM = 'CUSTOM',
+  WHITE = 'WHITE',
+  BOLD = 'BOLD',
 }
 
 enum ModifierClassNames {
   CUSTOM = 'custom',
+  WHITE = 'white',
+  BOLD = 'bold',
 }
 
 
@@ -26,6 +31,12 @@ const Text: React.FC<TextProps> = ({theme = [], children, style = ''}) => {
           }
           .custom{
             ${style}
+          }
+          .white{
+            color: ${CommonStyle.TextWhite};
+          }
+          .bold{
+            font-weight: bold;
           }
         `}
       </style>

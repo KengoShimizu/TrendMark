@@ -5,18 +5,20 @@ import CommonStyle from 'common/CommonStyle';
 interface InputProps {
   theme?: InputThemes[];
   style?: string;
+  placeholder?: string;
+  focus?: boolean;
   name: string;
 }
 
 export enum InputThemes {
-  CUSTOM_ = 'CUSTOM',
+  CUSTOM = 'CUSTOM',
 }
 
 enum ModifierClassNames {
   CUSTOM = 'custom',
 }
 
-const Input: React.FC<InputProps> = ({ theme = [], style = '', name }) => {
+const Input: React.FC<InputProps> = ({ theme = [], style = '', name, placeholder = '', focus = false }) => {
   const modifierClasses = theme.map(data => ModifierClassNames[data]).join(' ');
   return (
     <>
@@ -24,7 +26,8 @@ const Input: React.FC<InputProps> = ({ theme = [], style = '', name }) => {
         className={["input", modifierClasses].join(' ')}
         type="text" 
         name={name}
-        id={name}/>
+        id={name}
+        placeholder={placeholder}/>
       <style jsx>
         {`
           .input{
@@ -34,10 +37,12 @@ const Input: React.FC<InputProps> = ({ theme = [], style = '', name }) => {
             transition: ${CommonStyle.Transition};
           }
           .input:focus {
-            border: 1px solid ${CommonStyle.AccentColor}; 
-            box-shadow: 0 0 5px ${CommonStyle.AccentColor};
-            z-index: 10;
-            outline: 0;
+            ${focus && `
+              border: 1px solid ${CommonStyle.AccentColor}; 
+              box-shadow: 0 0 5px ${CommonStyle.AccentColor};
+              z-index: 10;
+              outline: 0;
+            `}
           }
           .custom{
             ${style}

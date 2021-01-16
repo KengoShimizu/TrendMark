@@ -1,6 +1,6 @@
 import React from 'react';
 // organism
-import SampleOrganism from '../organisms/SampleOrganism';
+import TopSearch from '../organisms/TopSearch';
 // template
 import SampleTemplate from '../templates/SampleTemplate';
 
@@ -10,7 +10,7 @@ const Top: React.FC = (props: any) => {
     <>
       <div className="container">
         <SampleTemplate>
-          <SampleOrganism/>
+          <TopSearch/>
         </SampleTemplate>
       </div>
       <style jsx>{`

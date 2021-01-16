@@ -20,7 +20,7 @@ enum ModifierClassNames {
 const Button: React.FC<ButtonProps> = ({ theme = [], children, style = '', onClick }) => {
   const modifierClasses = theme.map(data => ModifierClassNames[data]).join(' ');
   return (
-    <a className={["button", modifierClasses].join(' ')} onClick={onClick}>
+    <button className={["button", modifierClasses].join(' ')} onClick={onClick}>
       {children}
       <style jsx>
         {`
@@ -36,6 +36,8 @@ const Button: React.FC<ButtonProps> = ({ theme = [], children, style = '', onCli
             border-radius: 0.5rem;
             color: ${CommonStyle.TextWhite};
             background-color: ${CommonStyle.AccentColor};
+            outline: none;
+            border: none;
           }
           .button:hover{
             color: ${CommonStyle.TextWhite};
@@ -46,7 +48,7 @@ const Button: React.FC<ButtonProps> = ({ theme = [], children, style = '', onCli
           }
         `}
       </style>
-    </a>
+    </button>
   );
 }
 

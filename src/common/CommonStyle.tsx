@@ -4,18 +4,20 @@
 
 const CommonStyle = {
   // 色
-  AccentColor: '#eb6100',
+  AccentColor: '#31863F',
   SecondColor: '#f56500',
   BorderColor: '#ddd',
   // 文字色
   TextWhite: '#fff',
   // フォントサイズ 
-  Title: '24px',
-  SubTitle: '18px',
-  Text: '16px',
-  Caption: '14px',
-  Smallest: '12px',
-  IconCaption: '8px',
+  TextSize64: '64px',
+  TextSize48: '48px',
+  TextSize36: '36px',
+  TextSize24: '24px',
+  TextSize18: '18px',
+  TextSize16: '16px',
+  TextSize14: '14px',
+  TextSize12: '12px',
   // snsカラー
   TwitterColor: '#91C4F3',
   GoogleColor: '#D8503F',
