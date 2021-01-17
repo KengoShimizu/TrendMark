@@ -1,20 +1,23 @@
 import React from 'react';
+// common
+import CommonStyle from 'common/CommonStyle';
 // organism
 import TopSearch from '../organisms/TopSearch';
 // template
-import SampleTemplate from '../templates/SampleTemplate';
+import GeneralTemplate from '../templates/GeneralTemplate';
 
 
 const Top: React.FC = (props: any) => {
   return (
     <>
       <div className="container">
-        <SampleTemplate>
+        <GeneralTemplate>
           <TopSearch/>
-        </SampleTemplate>
+        </GeneralTemplate>
       </div>
       <style jsx>{`
         .container{
+          background-color: ${CommonStyle.Background1};
         }
       `}</style>
     </>

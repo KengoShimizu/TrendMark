@@ -7,6 +7,8 @@ const CommonStyle = {
   AccentColor: '#31863F',
   SecondColor: '#f56500',
   BorderColor: '#ddd',
+  Background1: '#F2F4EF',
+  Background2: '#E8EBE7',
   // 文字色
   TextWhite: '#fff',
   // フォントサイズ 
