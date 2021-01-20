@@ -6,13 +6,13 @@ import CommonStyle from 'common/CommonStyle';
 import Button, {ButtonThemes} from '../atoms/Button';
 import Input, {InputThemes} from '../atoms/Input';
 
-interface SplitCardProps {
+interface CardProps {
   children: React.ReactNode;
   width: number;
   margin?: string;
 }
 
-const Card: React.FC<SplitCardProps> = ({children, width, margin = ''}) => {
+const Card: React.FC<CardProps> = ({children, width, margin = ''}) => {
   return (
     <>
       <div className="container">
