@@ -1,5 +1,5 @@
 import React from 'react';
-import { LineChart, Line, XAxis, CartesianGrid, Tooltip } from 'recharts';
+import { LineChart, Line, XAxis, CartesianGrid, Tooltip, ReferenceLine } from 'recharts';
 // common
 import CommonStyle from 'common/CommonStyle';
 // atom
@@ -15,6 +15,7 @@ interface GraphProps {
 }
 
 const Graph: React.FC<GraphProps> = ({data, width, height}) => {
+  
   return (
     <>
       <LineChart
@@ -23,12 +24,11 @@ const Graph: React.FC<GraphProps> = ({data, width, height}) => {
         data={data}
         style={{margin: '0 auto'}}
       >
-        {/* <XAxis dataKey="date" /> */}
-        <XAxis dataKey="day" interval={6}/>
-        <Tooltip />
-        <CartesianGrid stroke="#f5f5f5" />
-        <Line type="monotone" dataKey="value" stroke="#ff7300" yAxisId={0} />
-        {/* <Line type="monotone" dataKey="pv" stroke="#387908" yAxisId={1} /> */}
+        <XAxis dataKey="date" type="category" interval={20}/>
+        <Tooltip active={false}/>
+        <CartesianGrid stroke={CommonStyle.Background2} />
+        {data?.filter(x => x.day === 1).map((x,i) => <ReferenceLine x={x.date} stroke={CommonStyle.SecondColor} key={`ReferenceLine${i}`}/>)}
+        <Line type="monotone" dataKey="value" stroke={CommonStyle.AccentColor} dot={false} activeDot={false}/>
       </LineChart>
       <style jsx>{`
       `}</style>

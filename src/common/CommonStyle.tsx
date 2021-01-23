@@ -5,7 +5,7 @@
 const CommonStyle = {
   // 色
   AccentColor: '#31863F',
-  SecondColor: '#f56500',
+  SecondColor: '#66cdaa',
   BorderColor: '#ddd',
   Background1: '#F2F4EF',
   Background2: '#E8EBE7',
