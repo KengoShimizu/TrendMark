@@ -9,8 +9,11 @@ const CommonStyle = {
   BorderColor: '#ddd',
   Background1: '#F2F4EF',
   Background2: '#E8EBE7',
+  Sunday: '#ff6347',
+  Saturday: '#4169e1',
   // 文字色
   TextWhite: '#fff',
+  TextBlack: '#000',
   // フォントサイズ 
   TextSize64: '64px',
   TextSize48: '48px',
