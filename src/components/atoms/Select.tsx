@@ -7,6 +7,7 @@ interface SelectProps {
   style?: string;
   name: string;
   options: {value: string, name: string}[];
+  handleChange: any;
 }
 
 export enum SelectThemes {
@@ -17,33 +18,58 @@ enum ModifierClassNames {
   CUSTOM = 'custom',
 }
 
-const Select: React.FC<SelectProps> = ({ theme = [], style = '', name, options }) => {
+const Select: React.FC<SelectProps> = ({ theme = [], style = '', name, options, handleChange }) => {
   const modifierClasses = theme.map(data => ModifierClassNames[data]).join(' ');
   return (
     <>
-      <select
-        className={["select", modifierClasses].join(' ')}
-        name={name}
-        id={name}>
-        {options.map((obj) => <option value={obj.value}>{obj.name}</option>)}
-      </select>
+      <div className="select-wrap">
+        <select
+          className={["select", modifierClasses].join(' ')}
+          name={name}
+          id={name}
+          onChange={handleChange} >
+          {options.map((obj) => <option value={obj.value}>{obj.name}</option>)}
+        </select>
+      </div>
       <style jsx>
         {`
-          .select{
-            border-radius: 3px;
-            border: 1px solid ${CommonStyle.BorderColor};
-            box-sizing: border-box;
-            transition: ${CommonStyle.Transition};
+          .select-wrap{
+            position: relative;
+            display: inline;
+          }
+          .select-wrap:before{
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            content: '';
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: ${CommonStyle.BorderColor};
+          }
+          .select-wrap:after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border: 0px;
+            border-bottom: solid 2px #b4b3b3;
+            border-right: solid 2px #b4b3b3;
+            -ms-transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            margin-top: -4px;
           }
           .select{
+            appearance: none;
             outline: none;
-            text-indent: 0.01px;
+            border: none;
             text-overflow: '';
-            background: none transparent;
-            vertical-align: middle;
             font-size: inherit;
-            color: inherit;
-            appearance: button;
+            width: 80px;
+            padding-left: 10px;
           }
           select option{
             background-color: #fff;

@@ -11,4 +11,15 @@ export const NumToDay = (num: number) => {
   else if (num === 5) day = 'Friday';
   else if (num === 6) day = 'Saturday';
   return day;
+}
+
+export const KeyToObj = (key: string) => {
+  switch (key) {
+    case 'monday':
+      return {type: 'day', value: 'Monday'};
+    case 'firstdate':
+      return {type: 'firstdate', value: 1};
+    case 'holiday':
+      return {type: '', value: ''};
+  }
 };

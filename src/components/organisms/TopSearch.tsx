@@ -16,20 +16,30 @@ import { useEffect } from 'react';
 
 const TopSearch: React.FC = (props: any) => {
   const [gData, setGdata] = useState<TimeLineData[] | undefined>(undefined);
+  const [selectedKey, setSelectedKey] = useState('monday');
+  const [searchWord, setSearchWord] = useState('');
   const options = [
     {value: 'monday', name: '月曜日'},
     {value: 'firstdate', name: '朔日'},
     {value: 'holiday', name: '祝日'},
   ]
 
-  useEffect(() => {
-    axios.get('http://localhost:3000/google-trends')
+  const Search = (word: string) => {
+    axios.get(`http://localhost:3000/google-trends/interest-over-time?word=${word}`)
       .then(function (response) {
-          // handle success
           setGdata(response.data);
       })
       .catch(function (error) {
-          // handle error
+        console.log(error);
+      });
+  }
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/google-trends/interest-over-time?word=ダイエット')
+      .then(function (response) {
+          setGdata(response.data);
+      })
+      .catch(function (error) {
         console.log(error);
       });
   }, []);
@@ -39,7 +49,7 @@ const TopSearch: React.FC = (props: any) => {
       <div className="main-content">
         <div className="top-main">
           <Text theme={[TextThemes.CUSTOM, TextThemes.WHITE, TextThemes.BOLD, TextThemes.SIZE36]}>あなたの事業宣伝、”いつ”しますか？</Text>
-          <SearchBar style='margin: 80px auto 0; '/>
+          <SearchBar style='margin: 80px auto 0;' onChange={setSearchWord} onSearch={Search} word={searchWord}/>
           <Text theme={[TextThemes.CUSTOM, TextThemes.WHITE, TextThemes.SIZE18]}>検索ワードは曜日や祝日と高い関連性を持ちます<br/>世界のトレンドに規則を見つけよう</Text>
         </div>
         <div className="chevrons-down">
@@ -49,8 +59,14 @@ const TopSearch: React.FC = (props: any) => {
 
       <Text theme={[TextThemes.CENTER, TextThemes.BOLD, TextThemes.SIZE36, TextThemes.CUSTOM]} style='padding-top: 36px;'>社会的ランドマークで見る検索トレンド</Text>
       <Card width={600} margin='0 auto 132px auto'>
-        <Text theme={[TextThemes.CENTER, TextThemes.BOLD, TextThemes.SIZE16, TextThemes.CUSTOM]} style='padding-top: 36px;'>検索ワード「ダイエット」の<Select name="landmark" options={options}/>で見る検索トレンド</Text>
-        <Graph data={gData} width={550} height={400}/>
+        <Text theme={[TextThemes.CENTER, TextThemes.SIZE16, TextThemes.CUSTOM]} style='padding-top: 36px;'>
+          検索ワード「<span className='text-bold'>ダイエット</span>」の
+          <Select name="landmark" options={options} handleChange={(e: any) => setSelectedKey(e.target.value)}/>
+          で見る検索トレンド
+        </Text>
+        
+        <Graph data={gData} width={550} height={400} selectedKey={selectedKey}/>
+        
         <Text theme={[TextThemes.SIZE18, TextThemes.CUSTOM]} style='width: 80%; margin: 0 auto; padding: 16px 0;'>
           人はある曜日や祝日に”特別”だと感じ、行動するようです<br/>
           <ul>

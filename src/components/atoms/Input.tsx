@@ -7,6 +7,8 @@ interface InputProps {
   style?: string;
   placeholder?: string;
   focus?: boolean;
+  onChange: any;
+  onKeyPress?: any;
   name: string;
 }
 
@@ -18,7 +20,7 @@ enum ModifierClassNames {
   CUSTOM = 'custom',
 }
 
-const Input: React.FC<InputProps> = ({ theme = [], style = '', name, placeholder = '', focus = false }) => {
+const Input: React.FC<InputProps> = ({ theme = [], style = '', name, placeholder = '', focus = false, onChange, onKeyPress }) => {
   const modifierClasses = theme.map(data => ModifierClassNames[data]).join(' ');
   return (
     <>
@@ -27,7 +29,9 @@ const Input: React.FC<InputProps> = ({ theme = [], style = '', name, placeholder
         type="text" 
         name={name}
         id={name}
-        placeholder={placeholder}/>
+        placeholder={placeholder}
+        onChange={e => onChange(e.target.value)}
+        onKeyPress={e => {if (e.key == 'Enter') onKeyPress(e.currentTarget.value)}}/>
       <style jsx>
         {`
           .input{
@@ -43,6 +47,9 @@ const Input: React.FC<InputProps> = ({ theme = [], style = '', name, placeholder
               z-index: 10;
               outline: 0;
             `}
+          }
+          input:-webkit-autofill {
+              box-shadow: 0 0 0 1000px ${CommonStyle.TextWhite} inset;
           }
           .custom{
             ${style}

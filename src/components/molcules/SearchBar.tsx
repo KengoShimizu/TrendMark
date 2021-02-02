@@ -6,6 +6,13 @@ import CommonStyle from 'common/CommonStyle';
 import Button, {ButtonThemes} from '../atoms/Button';
 import Input, {InputThemes} from '../atoms/Input';
 
+interface SearchBarProps {
+  style: string; 
+  onChange: any;
+  onSearch: any;
+  word: string;
+}
+
 const search_btn = `
   border-radius: 35px;
   height: 3.5em;
@@ -20,12 +27,12 @@ const search_input = `
   font-size: 1.6em;
 `;
 
-const SearchBar: React.FC<{style: string;}> = ({style}) => {
+const SearchBar: React.FC<SearchBarProps> = ({style, onChange, onSearch, word}) => {
   return (
     <>
       <div className="container">
-        <Input name='search' placeholder='検索キーワードを入力' theme={[InputThemes.CUSTOM]} style={search_input}/>
-        <Button theme={[ButtonThemes.CUSTOM]} style={search_btn}><Search size={28}/></Button>
+        <Input name='search' placeholder='検索キーワードを入力' theme={[InputThemes.CUSTOM]} style={search_input} onChange={onChange} onKeyPress={onSearch}/>
+        <Button theme={[ButtonThemes.CUSTOM]} style={search_btn} onClick={() => onSearch(word)}><Search size={28}/></Button>
       </div>
       <style jsx>{`
         .container{
